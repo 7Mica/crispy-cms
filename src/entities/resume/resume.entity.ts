@@ -8,8 +8,8 @@ import { Hobby } from './hobby.entity';
 @ObjectType()
 export class Resume {
   @Field(() => ID)
-  @PrimaryGeneratedColumn('increment')
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Field(() => String, { nullable: false })
   @Column({ nullable: false })
@@ -46,6 +46,10 @@ export class Resume {
   @Field(() => String, { nullable: false })
   @Column('text', { nullable: false })
   about: string;
+
+  @Field(() => Boolean, { nullable: false })
+  @Column('text', { nullable: false })
+  selected: boolean;
 
   @Field(() => [Career])
   @OneToMany(() => Career, (career) => career.resume, { cascade: true })

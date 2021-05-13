@@ -11,14 +11,17 @@ export class ResumeInput {
   @Field(() => String, { nullable: false })
   lastName: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   state: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   city: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   country: string;
+
+  @Field(() => Boolean)
+  selected: boolean;
 
   @Field(() => Int, { nullable: false })
   age: number;

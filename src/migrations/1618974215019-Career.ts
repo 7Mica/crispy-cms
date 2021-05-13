@@ -14,9 +14,9 @@ export class Career1618974215019 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'varchar',
             isPrimary: true,
-            generationStrategy: 'increment',
+            generationStrategy: 'uuid',
             isUnique: true,
             isGenerated: true,
             isNullable: false,
@@ -67,7 +67,7 @@ export class Career1618974215019 implements MigrationInterface {
       'career',
       new TableColumn({
         name: 'resumeId',
-        type: 'int',
+        type: 'varchar',
       }),
     );
 

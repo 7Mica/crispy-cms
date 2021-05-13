@@ -14,8 +14,8 @@ export class Hobby1618974218752 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
-            generationStrategy: 'increment',
+            type: 'varchar',
+            generationStrategy: 'uuid',
             isPrimary: true,
             isUnique: true,
             isGenerated: true,
@@ -40,7 +40,7 @@ export class Hobby1618974218752 implements MigrationInterface {
       'hobby',
       new TableColumn({
         name: 'resumeId',
-        type: 'int',
+        type: 'varchar',
       }),
     );
 

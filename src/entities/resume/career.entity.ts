@@ -6,25 +6,25 @@ import { Resume } from './resume.entity';
 @ObjectType()
 export class Career {
   @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @ManyToOne(() => Resume, (resume) => resume.careers, { onDelete: 'CASCADE' })
   resume: Resume;
 
   @Field(() => Int)
   @Column({ nullable: false })
-  resumeId: number;
+  resumeId: string;
 
   @Field(() => String, { nullable: false })
   @Column({ nullable: false })
   companyName: string;
 
-  @Field({ nullable: false })
+  @Field(() => Date, { nullable: false })
   @Column('date', { nullable: false })
   startDate: Date;
 
-  @Field({ nullable: false })
+  @Field(() => Date, { nullable: false })
   @Column('date', { nullable: false })
   endDate: Date;
 

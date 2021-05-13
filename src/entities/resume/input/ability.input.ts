@@ -3,6 +3,12 @@ import { AbilityEnum } from 'src/core/enum/ability.enum';
 
 @InputType()
 export class AbilityInput {
+  @Field(() => String)
+  id?: string;
+
+  @Field(() => Boolean, { nullable: true })
+  isNew: boolean;
+
   @Field(() => String, { nullable: false })
   logo: string;
 

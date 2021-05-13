@@ -4,6 +4,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 import { GqlConfigService } from './config/graphql-config.service';
+import { ScalarModule } from './core/custom-scalar/scalar.module';
 import { ResumeModule } from './entities/resume/resume.module';
 
 @Module({
@@ -19,6 +20,7 @@ import { ResumeModule } from './entities/resume/resume.module';
         }),
     }),
     ResumeModule,
+    ScalarModule,
   ],
   providers: [],
 })

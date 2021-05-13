@@ -8,8 +8,8 @@ export class Resume1618973202058 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
-            generationStrategy: 'increment',
+            type: 'varchar',
+            generationStrategy: 'uuid',
             isPrimary: true,
             isUnique: true,
             isGenerated: true,
@@ -55,6 +55,12 @@ export class Resume1618973202058 implements MigrationInterface {
           {
             name: 'about',
             type: 'text',
+            isNullable: false,
+          },
+          {
+            name: 'selected',
+            type: 'boolean',
+            default: false,
             isNullable: false,
           },
         ],

@@ -14,9 +14,9 @@ export class Ability1618974205261 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'varchar',
             isPrimary: true,
-            generationStrategy: 'increment',
+            generationStrategy: 'uuid',
             isUnique: true,
             isGenerated: true,
             isNullable: false,
@@ -46,7 +46,7 @@ export class Ability1618974205261 implements MigrationInterface {
       'ability',
       new TableColumn({
         name: 'resumeId',
-        type: 'int',
+        type: 'varchar',
       }),
     );
 

@@ -7,15 +7,15 @@ import { Resume } from './resume.entity';
 @ObjectType()
 export class Ability {
   @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @ManyToOne(() => Resume, (resume) => resume.careers, { onDelete: 'CASCADE' })
   resume: Resume;
 
   @Field(() => Int)
   @Column({ nullable: false })
-  resumeId: number;
+  resumeId: string;
 
   @Field(() => String, { nullable: false })
   @Column({ nullable: false })

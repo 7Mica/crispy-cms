@@ -6,8 +6,8 @@ import { Resume } from './resume.entity';
 @ObjectType()
 export class Hobby {
   @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Field(() => String, { nullable: false })
   @Column({ nullable: false })
@@ -19,7 +19,7 @@ export class Hobby {
 
   @Field(() => Int)
   @Column({ nullable: false })
-  resumeId: number;
+  resumeId: string;
 
   @ManyToOne(() => Resume, (resume) => resume.careers, { onDelete: 'CASCADE' })
   resume: Resume;
