@@ -11,23 +11,21 @@ export class UserResolver {
   constructor(private userService: UserService) {}
 
   @UseGuards(GqlAuthGuard)
-  @Mutation(() => String)
-  public async newUser(
+  @Mutation(() => User)
+  public newUser(
     @Args(
       { type: () => UserInput, name: 'userInput', nullable: false },
       PasswordPipe,
     )
     userInput: UserInput,
   ) {
-    await this.userService.createUser(userInput);
-
-    return 'Done';
+    return this.userService.createUser(userInput);
   }
 
   @UseGuards(GqlAuthGuard)
   @Query(() => User)
   public findUserByEmail(
-    @Args({ type: () => String, name: 'email', nullable: false }) email,
+    @Args({ type: () => String, name: 'email', nullable: false }) email: string,
   ) {
     return this.userService.findUserByEmail(email);
   }

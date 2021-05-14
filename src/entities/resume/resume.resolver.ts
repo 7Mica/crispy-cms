@@ -1,6 +1,7 @@
-import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { InternalServerErrorException, UseGuards } from '@nestjs/common';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/guards/graphql-auth.guard';
+import { CommonResponse } from 'src/core/http/common.response';
 import { ResumeInput } from './input/resume.input';
 import { Resume } from './resume.entity';
 import { ResumeService } from './resume.service';
@@ -10,40 +11,49 @@ export class ResumeResolver {
   constructor(private resumeService: ResumeService) {}
 
   @UseGuards(GqlAuthGuard)
-  @Mutation(() => String)
-  async deleteResume(
+  @Mutation(() => Int)
+  public async deleteResume(
     @Args({ type: () => String, name: 'resumeId', nullable: false })
     resumeId: string,
   ) {
-    await this.resumeService.deleteResume(resumeId);
+    const deleteResult = await this.resumeService.deleteResume(resumeId);
 
-    return 'Done';
+    return deleteResult.affected;
   }
 
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Resume)
-  async newResume(
+  public newResume(
     @Args({ type: () => ResumeInput, name: 'resumeInput', nullable: false })
     resumeInput: ResumeInput,
   ) {
     return this.resumeService.newResume(resumeInput);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [Resume])
-  async resumeList() {
+  public resumeList() {
     return this.resumeService.resumeList();
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation(() => String)
+  @Mutation(() => CommonResponse)
   async updateResume(
     @Args({ type: () => String, name: 'resumeId', nullable: false })
     resumeId: string,
     @Args({ type: () => ResumeInput, name: 'resumeInput', nullable: false })
     resumeInput: ResumeInput,
   ) {
-    await this.resumeService.updateResume(resumeId, resumeInput);
+    try {
+      await this.resumeService.updateResume(resumeId, resumeInput);
 
-    return 'Done';
+      const response: CommonResponse = {
+        success: true,
+      };
+
+      return response;
+    } catch (e) {
+      throw new InternalServerErrorException(e, 'Something went wrong');
+    }
   }
 }

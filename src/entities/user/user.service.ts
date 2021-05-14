@@ -11,15 +11,17 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  public async createUser(userInput: UserInput) {
-    await this.userRepository.save(userInput);
+  public createUser(userInput: UserInput): Promise<User> {
+    const userToCreate = this.userRepository.create(userInput);
+
+    return this.userRepository.save(userToCreate);
   }
 
-  public async findUserByEmail(email: string): Promise<User> {
+  public findUserByEmail(email: string): Promise<User> {
     return this.userRepository.findOne({ where: { email } });
   }
 
-  public async userList(): Promise<User[]> {
+  public userList(): Promise<User[]> {
     return this.userRepository.find();
   }
 }

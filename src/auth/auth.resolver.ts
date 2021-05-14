@@ -7,11 +7,11 @@ export class AuthResolver {
   constructor(private authService: AuthService) {}
 
   @Mutation(() => Token)
-  public async logIn(
+  public logIn(
     @Args({ type: () => String, name: 'email', nullable: false }) email: string,
     @Args({ type: () => String, name: 'password', nullable: false })
     password: string,
   ) {
-    return await this.authService.login(email, password);
+    return this.authService.login(email, password);
   }
 }
