@@ -70,6 +70,6 @@ export class Resume1618973202058 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('resume');
+    await queryRunner.dropTable('resume', true, true, true);
   }
 }

@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { GqlAuthGuard } from 'src/auth/guards/graphql-auth.guard';
 import { ResumeInput } from './input/resume.input';
 import { Resume } from './resume.entity';
 import { ResumeService } from './resume.service';
@@ -7,6 +9,7 @@ import { ResumeService } from './resume.service';
 export class ResumeResolver {
   constructor(private resumeService: ResumeService) {}
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => String)
   async deleteResume(
     @Args({ type: () => String, name: 'resumeId' }) resumeId: string,
@@ -16,6 +19,7 @@ export class ResumeResolver {
     return 'Done';
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Resume)
   async newResume(
     @Args({ type: () => ResumeInput, name: 'resumeInput' })
@@ -29,6 +33,7 @@ export class ResumeResolver {
     return this.resumeService.resumeList();
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => String)
   async updateResume(
     @Args({ type: () => String, name: 'resumeId' }) resumeId: string,
