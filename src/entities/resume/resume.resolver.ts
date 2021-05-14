@@ -12,7 +12,8 @@ export class ResumeResolver {
   @UseGuards(GqlAuthGuard)
   @Mutation(() => String)
   async deleteResume(
-    @Args({ type: () => String, name: 'resumeId' }) resumeId: string,
+    @Args({ type: () => String, name: 'resumeId', nullable: false })
+    resumeId: string,
   ) {
     await this.resumeService.deleteResume(resumeId);
 
@@ -22,7 +23,7 @@ export class ResumeResolver {
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Resume)
   async newResume(
-    @Args({ type: () => ResumeInput, name: 'resumeInput' })
+    @Args({ type: () => ResumeInput, name: 'resumeInput', nullable: false })
     resumeInput: ResumeInput,
   ) {
     return this.resumeService.newResume(resumeInput);
@@ -36,8 +37,9 @@ export class ResumeResolver {
   @UseGuards(GqlAuthGuard)
   @Mutation(() => String)
   async updateResume(
-    @Args({ type: () => String, name: 'resumeId' }) resumeId: string,
-    @Args({ type: () => ResumeInput, name: 'resumeInput' })
+    @Args({ type: () => String, name: 'resumeId', nullable: false })
+    resumeId: string,
+    @Args({ type: () => ResumeInput, name: 'resumeInput', nullable: false })
     resumeInput: ResumeInput,
   ) {
     await this.resumeService.updateResume(resumeId, resumeInput);

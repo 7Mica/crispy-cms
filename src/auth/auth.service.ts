@@ -4,7 +4,6 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { IPayload } from 'src/core/interfaces/payload.interface';
 import { IPrePayload } from 'src/core/interfaces/pre-payload.interface';
 import { UserService } from 'src/entities/user/user.service';
 import { Token } from './dto/token.schema';

@@ -10,9 +10,13 @@ import { UserService } from './user.service';
 export class UserResolver {
   constructor(private userService: UserService) {}
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => String)
   public async newUser(
-    @Args({ type: () => UserInput, name: 'userInput' }, PasswordPipe)
+    @Args(
+      { type: () => UserInput, name: 'userInput', nullable: false },
+      PasswordPipe,
+    )
     userInput: UserInput,
   ) {
     await this.userService.createUser(userInput);
@@ -20,11 +24,15 @@ export class UserResolver {
     return 'Done';
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
-  public findUserByEmail(@Args({ type: () => String, name: 'email' }) email) {
+  public findUserByEmail(
+    @Args({ type: () => String, name: 'email', nullable: false }) email,
+  ) {
     return this.userService.findUserByEmail(email);
   }
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => [User])
   public userList() {
     return this.userService.userList();
