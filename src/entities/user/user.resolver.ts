@@ -1,6 +1,8 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/guards/graphql-auth.guard';
+import { CurrentUser } from 'src/core/decorators/current-user.decorator';
+import { IPayload } from 'src/core/interfaces/payload.interface';
 import { PasswordPipe } from 'src/core/pipes/password.pipe';
 import { UserInput } from './input/user.input';
 import { User } from './user.entity';
@@ -31,14 +33,14 @@ export class UserResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Query(() => [User])
-  public userList() {
-    return this.userService.userList();
+  @Query(() => User)
+  public getAccountDetails(@CurrentUser() user: IPayload) {
+    return this.userService.findUserByEmail(user.email);
   }
 
   @UseGuards(GqlAuthGuard)
-  @Query(() => String)
-  public helloWorld() {
-    return 'hello world';
+  @Query(() => [User])
+  public userList() {
+    return this.userService.userList();
   }
 }

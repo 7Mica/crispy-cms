@@ -34,7 +34,7 @@ export class AuthService {
     return null;
   }
 
-  async login(email: string, password: string): Promise<Token> {
+  async signIn(email: string, password: string): Promise<Token> {
     const user = await this.userService.findUserByEmail(email);
 
     if (!user) {
