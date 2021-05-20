@@ -19,4 +19,12 @@ export class HobbyInput {
   @IsString()
   @Field(() => String, { nullable: false })
   description: string;
+
+  @IsString()
+  @Field(() => String, { nullable: false })
+  image: string;
+
+  @IsString()
+  @Field(() => String, { nullable: false })
+  imagehd: string;
 }

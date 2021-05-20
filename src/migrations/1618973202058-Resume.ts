@@ -43,11 +43,6 @@ export class Resume1618973202058 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'resumeFileUrl',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
             name: 'profileImage',
             type: 'varchar',
             isNullable: false,

@@ -37,10 +37,6 @@ export class Resume {
 
   @Field(() => String, { nullable: false })
   @Column({ nullable: false })
-  resumeFileUrl: string;
-
-  @Field(() => String, { nullable: false })
-  @Column({ nullable: false })
   profileImage: string;
 
   @Field(() => String, { nullable: false })

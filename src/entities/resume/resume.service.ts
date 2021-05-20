@@ -67,6 +67,15 @@ export class ResumeService {
     });
   }
 
+  public async getDefaultResume(): Promise<Resume> {
+    const selectedResume = await this.resumeRepository.findOne({
+      where: { selected: true },
+      relations: ['careers', 'hobbies', 'abilities'],
+    });
+
+    return selectedResume;
+  }
+
   public async resumeList(): Promise<Resume[]> {
     const resumeList = await this.resumeRepository.find({
       relations: ['careers', 'hobbies', 'abilities'],
@@ -87,7 +96,6 @@ export class ResumeService {
     resumeToUpdate.country = resume.country;
     resumeToUpdate.state = resume.state;
     resumeToUpdate.profileImage = resume.profileImage;
-    resumeToUpdate.resumeFileUrl = resume.resumeFileUrl;
     resumeToUpdate.selected = resume.selected;
 
     if (resume.selected) {
@@ -122,7 +130,7 @@ export class ResumeService {
     ability: AbilityInput,
     resumeId: string,
   ) {
-    if (ability.hasOwnProperty('new') && ability.isNew === true) {
+    if (ability.hasOwnProperty('isNew') && ability.isNew === true) {
       const { id, ...cleanAbility } = ability;
 
       const newAbility = this.abilityRepository.create(cleanAbility);
@@ -131,7 +139,7 @@ export class ResumeService {
       await this.abilityRepository.save(newAbility);
     }
 
-    if (ability.hasOwnProperty('new') && ability.isNew === false) {
+    if (ability.hasOwnProperty('isNew') && ability.isNew === false) {
       const abilityToUpdate = await this.abilityRepository.findOne({
         where: { id: ability.id },
       });
@@ -145,7 +153,7 @@ export class ResumeService {
   }
 
   protected async updateOrCreateHobby(hobby: HobbyInput, resumeId: string) {
-    if (hobby.hasOwnProperty('new') && hobby.isNew === true) {
+    if (hobby.hasOwnProperty('isNew') && hobby.isNew === true) {
       const { id, ...cleanHobby } = hobby;
 
       const newHobby = this.hobbyRepository.create(cleanHobby);
@@ -154,20 +162,22 @@ export class ResumeService {
       await this.hobbyRepository.save(newHobby);
     }
 
-    if (hobby.hasOwnProperty('new') && hobby.isNew === false) {
+    if (hobby.hasOwnProperty('isNew') && hobby.isNew === false) {
       const hobbyToUpdate = await this.hobbyRepository.findOne({
         where: { id: hobby.id },
       });
 
       hobbyToUpdate.name = hobby.name;
       hobbyToUpdate.description = hobby.description;
+      hobbyToUpdate.image = hobby.image;
+      hobbyToUpdate.imagehd = hobby.imagehd;
 
       await this.hobbyRepository.save(hobbyToUpdate);
     }
   }
 
   protected async updateOrCreateCareer(career: CareerInput, resumeId: string) {
-    if (career.hasOwnProperty('new') && career.isNew === true) {
+    if (career.hasOwnProperty('isNew') && career.isNew === true) {
       const { id, ...cleanCareer } = career;
 
       const newCareer = this.careerRepository.create(cleanCareer);
@@ -176,7 +186,7 @@ export class ResumeService {
       await this.careerRepository.save(newCareer);
     }
 
-    if (career.hasOwnProperty('new') && career.isNew === false) {
+    if (career.hasOwnProperty('isNew') && career.isNew === false) {
       const careerToUpdate = await this.careerRepository.findOne({
         where: { id: career.id },
       });

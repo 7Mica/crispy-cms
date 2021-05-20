@@ -31,6 +31,16 @@ export class Hobby1618974218752 implements MigrationInterface {
             type: 'varchar',
             isNullable: false,
           },
+          {
+            name: 'image',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
+            name: 'imagehd',
+            type: 'varchar',
+            isNullable: false,
+          },
         ],
       }),
       true,

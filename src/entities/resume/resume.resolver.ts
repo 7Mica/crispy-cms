@@ -37,8 +37,14 @@ export class ResumeResolver {
   }
 
   @UseGuards(GqlAuthGuard)
+  @Query(() => Resume, { nullable: true })
+  public getDefaultResume() {
+    return this.resumeService.getDefaultResume();
+  }
+
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => CommonResponse)
-  async updateResume(
+  public async updateResume(
     @Args({ type: () => String, name: 'resumeId', nullable: false })
     resumeId: string,
     @Args({ type: () => ResumeInput, name: 'resumeInput', nullable: false })

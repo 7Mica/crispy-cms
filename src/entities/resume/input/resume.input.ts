@@ -39,10 +39,6 @@ export class ResumeInput {
 
   @IsString()
   @Field(() => String, { nullable: false })
-  resumeFileUrl: string;
-
-  @IsString()
-  @Field(() => String, { nullable: false })
   profileImage: string;
 
   @IsString()
