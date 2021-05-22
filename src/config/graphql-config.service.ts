@@ -10,7 +10,7 @@ export class GqlConfigService implements GqlOptionsFactory {
 
   createGqlOptions(): GqlModuleOptions {
     return {
-      playground: this.configService.get<boolean>('GRAPHQL_PLAYGROUND'),
+      playground: Boolean(this.configService.get('GRAPHQL_PLAYGROUND')),
       autoSchemaFile: join(process.cwd(), 'src/generated/schema.gql'),
       sortSchema: true,
       buildSchemaOptions: {
