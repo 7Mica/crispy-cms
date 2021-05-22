@@ -36,7 +36,6 @@ export class ResumeResolver {
     return this.resumeService.resumeList();
   }
 
-  @UseGuards(GqlAuthGuard)
   @Query(() => Resume, { nullable: true })
   public getDefaultResume() {
     return this.resumeService.getDefaultResume();
