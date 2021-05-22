@@ -1,5 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PasswordService } from 'src/auth/password.service';
 import { Repository } from 'typeorm';
 import { UserInput } from './input/user.input';
 import { User } from './user.entity';
@@ -9,6 +14,7 @@ export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private passwordService: PasswordService,
   ) {}
 
   public createUser(userInput: UserInput): Promise<User> {
@@ -19,6 +25,35 @@ export class UserService {
 
   public findUserByEmail(email: string): Promise<User> {
     return this.userRepository.findOne({ where: { email } });
+  }
+
+  public async updateUserPassword(
+    email: string,
+    newPassword: string,
+    oldPassword: string,
+  ): Promise<boolean> {
+    const userFound = await this.userRepository.findOne({ where: { email } });
+
+    if (!userFound) {
+      throw new NotFoundException(
+        `User with email ${email} does not exist in the data base`,
+      );
+    }
+
+    const hasTheSameOldPassword = await this.passwordService.compare(
+      oldPassword,
+      userFound.password,
+    );
+
+    if (!hasTheSameOldPassword) {
+      throw new BadRequestException('Old password does not match.');
+    }
+
+    userFound.password = await this.passwordService.hash(newPassword);
+
+    await this.userRepository.save(userFound);
+
+    return true;
   }
 
   public userList(): Promise<User[]> {
