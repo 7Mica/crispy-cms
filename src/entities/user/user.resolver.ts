@@ -42,10 +42,17 @@ export class UserResolver {
   @Mutation(() => Boolean)
   public updateUserPassword(
     @CurrentUser() { email }: IPayload,
-    @Args({ type: () => String, name: 'newPassword' }) newPassword: string,
     @Args({ type: () => String, name: 'oldPassword' }) oldPassword: string,
+    @Args({ type: () => String, name: 'newPassword' }) newPassword: string,
+    @Args({ type: () => String, name: 'repeatPassword' })
+    repeatPassword: string,
   ) {
-    return this.userService.updateUserPassword(email, newPassword, oldPassword);
+    return this.userService.updateUserPassword(
+      email,
+      oldPassword,
+      newPassword,
+      repeatPassword,
+    );
   }
 
   @UseGuards(GqlAuthGuard)

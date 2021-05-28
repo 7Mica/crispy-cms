@@ -29,9 +29,14 @@ export class UserService {
 
   public async updateUserPassword(
     email: string,
-    newPassword: string,
     oldPassword: string,
+    newPassword: string,
+    repeatPassword: string,
   ): Promise<boolean> {
+    if (newPassword !== repeatPassword) {
+      throw new BadRequestException('New password must coincide.');
+    }
+
     const userFound = await this.userRepository.findOne({ where: { email } });
 
     if (!userFound) {
