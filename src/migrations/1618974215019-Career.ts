@@ -34,7 +34,7 @@ export class Career1618974215019 implements MigrationInterface {
           {
             name: 'endDate',
             type: 'date',
-            isNullable: false,
+            isNullable: true,
           },
           {
             name: 'jobTitle',

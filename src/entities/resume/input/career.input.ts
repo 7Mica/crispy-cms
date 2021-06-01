@@ -27,7 +27,7 @@ export class CareerInput {
   startDate: Date;
 
   @IsDate()
-  @Field(() => Date, { nullable: false })
+  @Field(() => Date, { nullable: true })
   endDate: Date;
 
   @IsOptional()

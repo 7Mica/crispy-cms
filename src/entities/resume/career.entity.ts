@@ -24,8 +24,8 @@ export class Career {
   @Column('date', { nullable: false })
   startDate: Date;
 
-  @Field(() => Date, { nullable: false })
-  @Column('date', { nullable: false })
+  @Field(() => Date, { nullable: true })
+  @Column('date', { nullable: true })
   endDate: Date;
 
   @Field(() => String)
