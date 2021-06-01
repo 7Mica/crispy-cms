@@ -27,6 +27,10 @@ export class Hobby {
 
   @Field(() => Int)
   @Column({ nullable: false })
+  weight: number;
+
+  @Field(() => Int)
+  @Column({ nullable: false })
   resumeId: string;
 
   @ManyToOne(() => Resume, (resume) => resume.careers, { onDelete: 'CASCADE' })

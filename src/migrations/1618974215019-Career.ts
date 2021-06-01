@@ -58,6 +58,12 @@ export class Career1618974215019 implements MigrationInterface {
             name: 'country',
             type: 'varchar',
           },
+          {
+            name: 'weight',
+            type: 'int',
+            isNullable: false,
+            default: 0,
+          },
         ],
       }),
       true,

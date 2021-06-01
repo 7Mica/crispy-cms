@@ -76,6 +76,37 @@ export class ResumeService {
     return selectedResume;
   }
 
+  public async getResumeCareers(resumeId: string): Promise<Career[]> {
+    const careers = await this.careerRepository.find({
+      where: {
+        resumeId,
+      },
+    });
+
+    return careers;
+  }
+
+  public async getResumeHobbies(resumeId: string): Promise<Hobby[]> {
+    const hobbies = await this.hobbyRepository.find({
+      where: {
+        resumeId,
+      },
+      order: { weight: 'ASC' },
+    });
+
+    return hobbies;
+  }
+
+  public async getResumeAbilities(resumeId: string): Promise<Ability[]> {
+    const abilities = await this.abilityRepository.find({
+      where: {
+        resumeId,
+      },
+    });
+
+    return abilities;
+  }
+
   public async resumeList(): Promise<Resume[]> {
     const resumeList = await this.resumeRepository.find({
       relations: ['careers', 'hobbies', 'abilities'],
@@ -146,6 +177,7 @@ export class ResumeService {
 
       abilityToUpdate.abilityName = ability.abilityName;
       abilityToUpdate.logo = ability.logo;
+      abilityToUpdate.weight = ability.weight;
       abilityToUpdate.percent = ability.percent;
 
       await this.abilityRepository.save(abilityToUpdate);
@@ -171,6 +203,7 @@ export class ResumeService {
       hobbyToUpdate.description = hobby.description;
       hobbyToUpdate.image = hobby.image;
       hobbyToUpdate.imagehd = hobby.imagehd;
+      hobbyToUpdate.weight = hobby.weight;
 
       await this.hobbyRepository.save(hobbyToUpdate);
     }
@@ -199,6 +232,7 @@ export class ResumeService {
       careerToUpdate.city = career.city;
       careerToUpdate.state = career.state;
       careerToUpdate.country = career.country;
+      careerToUpdate.weight = career.weight;
 
       await this.careerRepository.save(careerToUpdate);
     }

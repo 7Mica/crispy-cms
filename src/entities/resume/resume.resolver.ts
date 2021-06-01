@@ -1,12 +1,23 @@
 import { InternalServerErrorException, UseGuards } from '@nestjs/common';
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
+import {
+  Args,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/guards/graphql-auth.guard';
 import { CommonResponse } from 'src/core/http/common.response';
+import { Ability } from './ability.entity';
+import { Career } from './career.entity';
+import { Hobby } from './hobby.entity';
 import { ResumeInput } from './input/resume.input';
 import { Resume } from './resume.entity';
 import { ResumeService } from './resume.service';
 
-@Resolver()
+@Resolver(() => Resume)
 export class ResumeResolver {
   constructor(private resumeService: ResumeService) {}
 
@@ -60,5 +71,20 @@ export class ResumeResolver {
     } catch (e) {
       throw new InternalServerErrorException(e, 'Something went wrong');
     }
+  }
+
+  @ResolveField(() => [Career])
+  careers(@Parent() resume: Resume) {
+    return this.resumeService.getResumeCareers(resume.id);
+  }
+
+  @ResolveField(() => [Hobby])
+  hobbies(@Parent() resume: Resume) {
+    return this.resumeService.getResumeHobbies(resume.id);
+  }
+
+  @ResolveField(() => [Ability])
+  abilities(@Parent() resume: Resume) {
+    return this.resumeService.getResumeAbilities(resume.id);
   }
 }

@@ -47,4 +47,8 @@ export class Career {
   @Field(() => String, { nullable: false })
   @Column('varchar', { length: 450, nullable: false })
   description: string;
+
+  @Field(() => Int)
+  @Column({ nullable: false })
+  weight: number;
 }

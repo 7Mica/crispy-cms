@@ -37,6 +37,12 @@ export class Ability1618974205261 implements MigrationInterface {
             enum: ['SKILL', 'LANGUAGE', 'OS', 'TOOL'],
             isNullable: false,
           },
+          {
+            name: 'weight',
+            type: 'int',
+            isNullable: false,
+            default: 0,
+          },
         ],
       }),
       true,

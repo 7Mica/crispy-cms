@@ -1,5 +1,5 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
 @InputType()
 export class HobbyInput {
@@ -27,4 +27,8 @@ export class HobbyInput {
   @IsString()
   @Field(() => String, { nullable: false })
   imagehd: string;
+
+  @IsNumber()
+  @Field(() => Int, { nullable: false })
+  weight: number;
 }

@@ -1,5 +1,11 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsBoolean, IsDate, IsOptional, IsString } from 'class-validator';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import {
+  IsBoolean,
+  IsDate,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 @InputType()
 export class CareerInput {
@@ -46,4 +52,8 @@ export class CareerInput {
   @IsString()
   @Field(() => String, { nullable: false })
   description: string;
+
+  @IsNumber()
+  @Field(() => Int, { nullable: false })
+  weight: number;
 }

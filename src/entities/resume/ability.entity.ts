@@ -32,4 +32,8 @@ export class Ability {
     nullable: false,
   })
   abilityName: AbilityEnum;
+
+  @Field(() => Int)
+  @Column({ nullable: false })
+  weight: number;
 }
