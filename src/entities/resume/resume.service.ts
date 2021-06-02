@@ -81,6 +81,7 @@ export class ResumeService {
       where: {
         resumeId,
       },
+      order: { weight: 'ASC' },
     });
 
     return careers;
@@ -102,6 +103,7 @@ export class ResumeService {
       where: {
         resumeId,
       },
+      order: { weight: 'ASC' },
     });
 
     return abilities;
