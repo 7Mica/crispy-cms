@@ -17,13 +17,17 @@ export class AbilityInput {
   @Field(() => String, { nullable: false })
   logo: string;
 
-  @IsString()
+  @IsNumber()
   @Field(() => Int, { nullable: false })
   percent: number;
 
   @IsString()
-  @Field(() => AbilityEnum)
+  @Field(() => AbilityEnum, { nullable: true })
   abilityName: AbilityEnum;
+
+  @IsString()
+  @Field(() => String)
+  description: string;
 
   @IsNumber()
   @Field(() => Int, { nullable: false })

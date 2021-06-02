@@ -179,6 +179,7 @@ export class ResumeService {
       abilityToUpdate.logo = ability.logo;
       abilityToUpdate.weight = ability.weight;
       abilityToUpdate.percent = ability.percent;
+      abilityToUpdate.description = ability.description;
 
       await this.abilityRepository.save(abilityToUpdate);
     }

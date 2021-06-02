@@ -25,13 +25,17 @@ export class Ability {
   @Column('int', { nullable: false })
   percent: number;
 
-  @Field(() => AbilityEnum)
+  @Field(() => AbilityEnum, { nullable: true })
   @Column({
     type: 'enum',
     enum: AbilityEnum,
-    nullable: false,
+    nullable: true,
   })
   abilityName: AbilityEnum;
+
+  @Field(() => String)
+  @Column({ nullable: true })
+  description: string;
 
   @Field(() => Int)
   @Column({ nullable: false })

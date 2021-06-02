@@ -44,6 +44,7 @@ export class Career1618974215019 implements MigrationInterface {
           {
             name: 'description',
             type: 'varchar',
+            length: '450',
             isNullable: false,
           },
           {

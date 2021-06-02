@@ -24,7 +24,12 @@ export class Ability1618974205261 implements MigrationInterface {
           {
             name: 'logo',
             type: 'varchar',
-            isNullable: false,
+            isNullable: true,
+          },
+          {
+            name: 'description',
+            type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'percent',

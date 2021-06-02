@@ -50,6 +50,7 @@ export class Resume1618973202058 implements MigrationInterface {
           {
             name: 'about',
             type: 'text',
+            length: '450',
             isNullable: false,
           },
           {
