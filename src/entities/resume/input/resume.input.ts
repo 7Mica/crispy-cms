@@ -16,17 +16,17 @@ export class ResumeInput {
 
   @IsOptional()
   @IsString()
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   state: string;
 
   @IsOptional()
   @IsString()
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   city: string;
 
   @IsOptional()
   @IsString()
-  @Field(() => String, { nullable: true })
+  @Field(() => String)
   country: string;
 
   @IsBoolean()
