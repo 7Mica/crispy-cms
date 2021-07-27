@@ -1,6 +1,8 @@
 FROM httpd
 
-COPY ./httpd/httpd.conf /usr/local/apache2/conf/httpd.conf
+RUN rm /usr/local/apache2/htdocs/*.*
+
+COPY ./personal-resume /usr/local/apache2/htdocs
 COPY ./httpd/httpd-vhosts.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
 
 EXPOSE 80
