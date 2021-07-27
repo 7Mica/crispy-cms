@@ -5,6 +5,8 @@
 profile-resume/
 .env
 
+# backgups
+dumps/*.sql
 
 # Logs
 logs
