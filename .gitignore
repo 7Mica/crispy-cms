@@ -2,6 +2,9 @@
 /dist
 /node_modules
 /src/generated
+profile-resume/
+.env
+
 
 # Logs
 logs
@@ -26,8 +29,4 @@ lerna-debug.log*
 *.launch
 .settings/
 *.sublime-workspace
-
-# IDE - VSCode
 .vscode/*
-
-.env

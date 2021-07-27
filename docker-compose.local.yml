@@ -9,7 +9,7 @@ services:
     environment:
       MARIADB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MARIADB_DATABASE: ${DATABASE_NAME}
-      MARIADB_USER: ${DATABASe_USER}
+      MARIADB_USER: ${DATABASE_USER}
       MARIADB_PASSWORD: ${DATABASE_USER_PASSWORD}
     networks:
       - backend_network
