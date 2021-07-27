@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  mariadb:
+    container_name: cms_database
+    image: mariadb
+    ports:
+      - ${DATABASE_EXPOSE}:3306
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USER: ${DATABASe_USER}
+      MARIADB_PASSWORD: ${DATABASE_USER_PASSWORD}
+    networks:
+      - backend_network
+
+  cms_nestjs:
+    container_name: cms_nestjs
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    build:
+      context: ./
+      dockerfile: ./Dockerfile.local
+    volumes:
+      - ./:/app
+    networks:
+      - backend_network
+    depends_on:
+      - mariadb
+
+networks:
+  backend_network:
