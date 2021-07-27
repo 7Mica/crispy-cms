@@ -21,8 +21,6 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    volumes:
-      - ./:/app
     networks:
       - backend_network
     depends_on:
