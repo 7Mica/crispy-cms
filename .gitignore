@@ -2,7 +2,7 @@
 /dist
 /node_modules
 /src/generated
-profile-resume/
+personal-resume/
 .env
 
 # backgups
