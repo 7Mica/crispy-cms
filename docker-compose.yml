@@ -32,6 +32,8 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile.httpd
+    volumes:
+      - ./personal-resume:/usr/local/apache2/htdocs
     networks:
       - backend_network
     ports:
