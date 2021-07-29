@@ -16,7 +16,6 @@ services:
 
   cms_nestjs:
     container_name: cms_nestjs
-    restart: unless-stopped
     env_file:
       - .env
     ports:
