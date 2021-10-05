@@ -33,7 +33,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile.httpd
     volumes:
-      - ./personal-resume:/usr/local/apache2/htdocs
+      - ./personal-resume:/usr/local/apache2/htdocs/greenparrot
       - ./sierra-madre:/usr/local/apache2/htdocs/sierra-madre
     networks:
       - backend_network
