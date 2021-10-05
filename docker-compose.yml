@@ -34,6 +34,7 @@ services:
       dockerfile: ./Dockerfile.httpd
     volumes:
       - ./personal-resume:/usr/local/apache2/htdocs
+      - ./sierra-madre:/usr/local/apache2/htdocs/sierra-madre
     networks:
       - backend_network
     ports:
