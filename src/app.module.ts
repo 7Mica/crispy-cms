@@ -8,6 +8,7 @@ import { GqlConfigService } from './config/graphql-config.service';
 import { ScalarModule } from './core/custom-scalar/scalar.module';
 import { GitHubModule } from './entities/github/github.module';
 import { ResumeModule } from './entities/resume/resume.module';
+import { SierraMadreModule } from './entities/sierra-madre/sierra-madre.module';
 import { UserModule } from './entities/user/user.module';
 
 @Module({
@@ -26,6 +27,7 @@ import { UserModule } from './entities/user/user.module';
     ResumeModule,
     UserModule,
     GitHubModule,
+    SierraMadreModule,
     ScalarModule,
   ],
   providers: [],

@@ -44,7 +44,7 @@ export class Resume {
   about: string;
 
   @Field(() => Boolean, { nullable: false })
-  @Column('text', { nullable: false })
+  @Column('boolean', { nullable: false })
   selected: boolean;
 
   @Field(() => [Career])
