@@ -9,6 +9,8 @@ import { CareerInput } from './input/career.input';
 import { HobbyInput } from './input/hobby.input';
 import { ResumeInput } from './input/resume.input';
 import { Resume } from './resume.entity';
+import { Certification } from './certification.entity';
+import { CertificationInput } from './input/certification.input';
 
 @Injectable()
 export class ResumeService {
@@ -17,6 +19,8 @@ export class ResumeService {
     private resumeRepository: Repository<Resume>,
     @InjectRepository(Ability)
     private abilityRepository: Repository<Ability>,
+    @InjectRepository(Certification)
+    private certificationRepository: Repository<Certification>,
     @InjectRepository(Career)
     private careerRepository: Repository<Career>,
     @InjectRepository(Hobby)
@@ -47,6 +51,16 @@ export class ResumeService {
     );
 
     await this.abilityRepository.save(abilityEntity);
+
+    const certificationEntity = this.certificationRepository.create(
+      certifications.map((certification: CertificationInput) => {
+        const { id, ...props } = certification;
+
+        return { ...props, resumeId: savedResume.id };
+      }),
+    );
+
+    await this.certificationRepository.save(certificationEntity);
 
     const careerEntity = this.careerRepository.create(
       careers.map((career: CareerInput) => {
@@ -117,14 +131,20 @@ export class ResumeService {
 
   public async resumeList(): Promise<Resume[]> {
     const resumeList = await this.resumeRepository.find({
-      relations: ['careers', 'hobbies', 'abilities'],
+      relations: ['careers', 'hobbies', 'abilities', 'certifications'],
     });
 
     return resumeList;
   }
 
   public async updateResume(resumeId: string, resumeInput: ResumeInput) {
-    const { abilities, careers, hobbies, ...resume } = resumeInput;
+    const {
+      abilities,
+      careers,
+      hobbies,
+      certifications,
+      ...resume
+    } = resumeInput;
     const resumeToUpdate = await this.resumeRepository.findOne(resumeId);
 
     resumeToUpdate.firstName = resume.firstName;
@@ -158,6 +178,11 @@ export class ResumeService {
     // Update Hobbies
     hobbies.forEach(async (hobby: HobbyInput) =>
       this.updateOrCreateHobby(hobby, resumeId),
+    );
+
+    // Update Certifications
+    certifications.forEach(async (certification: CertificationInput) =>
+      this.updateOrCreateCertification(certification, resumeId),
     );
 
     abilities.forEach(async (ability: AbilityInput) =>
@@ -215,6 +240,40 @@ export class ResumeService {
       hobbyToUpdate.weight = hobby.weight;
 
       await this.hobbyRepository.save(hobbyToUpdate);
+    }
+  }
+
+  protected async updateOrCreateCertification(
+    certification: CertificationInput,
+    resumeId: string,
+  ) {
+    if (certification.hasOwnProperty('isNew') && certification.isNew === true) {
+      const { id, ...cleanCareer } = certification;
+
+      const newCertification = this.certificationRepository.create(cleanCareer);
+      newCertification.resumeId = resumeId;
+
+      await this.certificationRepository.save(newCertification);
+    }
+
+    if (
+      certification.hasOwnProperty('isNew') &&
+      certification.isNew === false
+    ) {
+      const certificationToUpdate = await this.certificationRepository.findOne({
+        where: { id: certification.id },
+      });
+
+      certificationToUpdate.certificationUrl = certification.certificationUrl;
+      certificationToUpdate.certificationDescription =
+        certification.certificationDescription;
+      certificationToUpdate.certificationCode = certification.certificationCode;
+      certificationToUpdate.certificationImageUrl =
+        certification.certificationImageUrl;
+      certificationToUpdate.status = certification.status;
+      certificationToUpdate.weight = certification.weight;
+
+      await this.certificationRepository.save(certificationToUpdate);
     }
   }
 

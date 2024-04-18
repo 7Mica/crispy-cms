@@ -1,9 +1,13 @@
-import { Field, InputType } from '@nestjs/graphql';
-import { IsBoolean, IsOptional } from 'class-validator';
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 import { CertificationStatusEnum } from '../../../core/enum/certification-status.enum';
 
 @InputType()
 export class CertificationInput {
+  @IsString()
+  @Field(() => String)
+  id?: string;
+
   @IsOptional()
   @IsBoolean()
   @Field(() => Boolean, { nullable: true })
@@ -23,4 +27,8 @@ export class CertificationInput {
 
   @Field(() => CertificationStatusEnum, { nullable: false })
   status: CertificationStatusEnum;
+
+  @IsNumber()
+  @Field(() => Int, { nullable: false })
+  weight: number;
 }

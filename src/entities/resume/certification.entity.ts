@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Resume } from './resume.entity';
 import { CertificationStatusEnum } from '../../core/enum/certification-status.enum';
 
@@ -10,7 +10,7 @@ export class Certification {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Resume, (resume) => resume.careers, { onDelete: 'CASCADE' })
+  @ManyToOne(() => Resume, (resume) => resume.certifications, { onDelete: 'CASCADE' })
   resume: Resume;
 
   @Field(() => String)
@@ -37,4 +37,12 @@ export class Certification {
     nullable: true,
   })
   status: CertificationStatusEnum;
+
+  @Field(() => Int)
+  @Column({ nullable: false })
+  resumeId: string;
+
+  @Field(() => Int)
+  @Column({ nullable: false })
+  weight: number;
 }
