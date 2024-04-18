@@ -90,7 +90,7 @@ export class ResumeService {
   public async getDefaultResume(): Promise<Resume> {
     const selectedResume = await this.resumeRepository.findOne({
       where: { selected: true },
-      relations: ['careers', 'hobbies', 'abilities'],
+      relations: ['careers', 'hobbies', 'abilities', 'certifications'],
     });
 
     return selectedResume;
