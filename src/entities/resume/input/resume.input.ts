@@ -3,6 +3,8 @@ import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 import { AbilityInput } from './ability.input';
 import { CareerInput } from './career.input';
 import { HobbyInput } from './hobby.input';
+import { CertificationInput } from './certification.input';
+import { Certification } from '../certification.entity';
 
 @InputType()
 export class ResumeInput {
@@ -56,4 +58,8 @@ export class ResumeInput {
   @IsOptional()
   @Field(() => [HobbyInput])
   hobbies: HobbyInput[];
+
+  @IsOptional()
+  @Field(() => [CertificationInput])
+  certifications: CertificationInput[];
 }

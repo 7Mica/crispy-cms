@@ -3,6 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Ability } from './ability.entity';
 import { Career } from './career.entity';
 import { Hobby } from './hobby.entity';
+import { Certification } from './certification.entity';
 
 @Entity()
 @ObjectType()
@@ -50,6 +51,12 @@ export class Resume {
   @Field(() => [Career])
   @OneToMany(() => Career, (career) => career.resume, { cascade: true })
   careers: Career[];
+
+  @Field(() => [Certification])
+  @OneToMany(() => Certification, (certification) => certification.resume, {
+    cascade: true,
+  })
+  certifications: Certification[];
 
   @Field(() => [Ability])
   @OneToMany(() => Ability, (ability) => ability.resume, { cascade: true })

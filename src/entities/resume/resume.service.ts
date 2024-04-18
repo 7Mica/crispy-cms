@@ -28,7 +28,13 @@ export class ResumeService {
   }
 
   public async newResume(resumeInput: ResumeInput): Promise<Resume> {
-    const { careers, hobbies, abilities, ...resume } = resumeInput;
+    const {
+      careers,
+      hobbies,
+      abilities,
+      certifications,
+      ...resume
+    } = resumeInput;
     const resumeEntity = this.resumeRepository.create(resume);
     const savedResume = await this.resumeRepository.save(resumeEntity);
 

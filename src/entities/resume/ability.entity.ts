@@ -13,7 +13,7 @@ export class Ability {
   @ManyToOne(() => Resume, (resume) => resume.careers, { onDelete: 'CASCADE' })
   resume: Resume;
 
-  @Field(() => Int)
+  @Field(() => String)
   @Column({ nullable: false })
   resumeId: string;
 
