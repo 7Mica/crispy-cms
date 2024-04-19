@@ -101,7 +101,7 @@ export class ResumeService {
     await this.hobbyRepository.save(hobbyEntity);
 
     return this.resumeRepository.findOne(savedResume.id, {
-      relations: ['careers', 'hobbies', 'abilities'],
+      relations: ['careers', 'hobbies', 'abilities', 'certifications'],
     });
   }
 
