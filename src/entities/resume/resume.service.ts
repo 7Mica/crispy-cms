@@ -31,6 +31,24 @@ export class ResumeService {
     return this.resumeRepository.delete(resumeId);
   }
 
+  public async deleteHobby(hobbyId: string): Promise<DeleteResult> {
+    return this.hobbyRepository.delete(hobbyId);
+  }
+
+  public async deleteCareer(careerId: string): Promise<DeleteResult> {
+    return this.careerRepository.delete(careerId);
+  }
+
+  public async deleteCertification(
+    certificationId: string,
+  ): Promise<DeleteResult> {
+    return this.certificationRepository.delete(certificationId);
+  }
+
+  public async deleteAbility(abilityId: string): Promise<DeleteResult> {
+    return this.abilityRepository.delete(abilityId);
+  }
+
   public async newResume(resumeInput: ResumeInput): Promise<Resume> {
     const {
       careers,

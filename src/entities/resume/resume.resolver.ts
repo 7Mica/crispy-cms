@@ -33,6 +33,52 @@ export class ResumeResolver {
   }
 
   @UseGuards(GqlAuthGuard)
+  @Mutation(() => Int)
+  public async deleteHobby(
+    @Args({ type: () => String, name: 'hobbyId', nullable: false })
+    hobbyId: string,
+  ) {
+    const deleteResult = await this.resumeService.deleteHobby(hobbyId);
+
+    return deleteResult.affected;
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => Int)
+  public async deleteCareer(
+    @Args({ type: () => String, name: 'careerId', nullable: false })
+    careerId: string,
+  ) {
+    const deleteResult = await this.resumeService.deleteCareer(careerId);
+
+    return deleteResult.affected;
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => Int)
+  public async deleteAbility(
+    @Args({ type: () => String, name: 'abilityId', nullable: false })
+    abilityId: string,
+  ) {
+    const deleteResult = await this.resumeService.deleteAbility(abilityId);
+
+    return deleteResult.affected;
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => Int)
+  public async deleteCertification(
+    @Args({ type: () => String, name: 'certificationId', nullable: false })
+    certificationId: string,
+  ) {
+    const deleteResult = await this.resumeService.deleteCertification(
+      certificationId,
+    );
+
+    return deleteResult.affected;
+  }
+
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Resume)
   public newResume(
     @Args({ type: () => ResumeInput, name: 'resumeInput', nullable: false })
