@@ -4,7 +4,7 @@ services:
   mariadb:
     container_name: cms_database
     restart: unless-stopped
-    image: mariadb
+    image: mariadb:11.3.2
     environment:
       MARIADB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MARIADB_DATABASE: ${DATABASE_NAME}
