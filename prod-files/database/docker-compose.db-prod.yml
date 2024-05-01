@@ -1,0 +1,20 @@
+# Only run this the first time to create the database server in AWS EC2 or any other service
+name: database-prod
+
+services:
+  mariadb:
+    image: mariadb:11.3.2
+    container_name: cms_database
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${DATABASE_NAME}
+      MARIADB_USER: ${DATABASE_USER}
+      MARIADB_PASSWORD: ${DATABASE_USER_PASSWORD}
+    ports:
+      - ${DATABASE_EXPOSE}:${DATABASE_EXPOSE}
+    networks:
+      - database_network
+
+networks:
+  database_network:

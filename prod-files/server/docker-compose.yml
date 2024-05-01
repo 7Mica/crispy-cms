@@ -1,0 +1,23 @@
+services:
+  cms_nestjs:
+    container_name: cms_nestjs
+    restart: unless-stopped
+    image: crispy-cms:firsttry
+    networks:
+      - backend_network
+
+  httpd:
+    container_name: proxy_server
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile.httpd
+    networks:
+      - backend_network
+    ports:
+      - 80:80
+    depends_on:
+      - cms_nestjs
+
+networks:
+  backend_network:

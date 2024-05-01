@@ -108,6 +108,39 @@ INSERT INTO `career` VALUES
 UNLOCK TABLES;
 
 --
+-- Table structure for table `certification`
+--
+
+DROP TABLE IF EXISTS `certification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `certification` (
+  `id` varchar(36) NOT NULL,
+  `certificationUrl` varchar(255) NOT NULL,
+  `certificationImageUrl` varchar(255) NOT NULL,
+  `certificationDescription` varchar(255) NOT NULL,
+  `certificationCode` varchar(255) NOT NULL,
+  `status` enum('COMPLETED','IN_PROGRESS') DEFAULT 'IN_PROGRESS',
+  `resumeId` varchar(255) NOT NULL,
+  `weight` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_f138c678f5e2118faacfac94ca9` (`resumeId`),
+  CONSTRAINT `FK_f138c678f5e2118faacfac94ca9` FOREIGN KEY (`resumeId`) REFERENCES `resume` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `certification`
+--
+
+LOCK TABLES `certification` WRITE;
+/*!40000 ALTER TABLE `certification` DISABLE KEYS */;
+INSERT INTO `certification` VALUES
+('2570a484-62d5-4755-94d8-36361a81f3ec','https://www.credly.com/badges/afb0111f-ce81-46af-a635-36d019a0c26e/public_url','https://images.credly.com/size/340x340/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png','AWS Certified Cloud Practitioner','afb0111f-ce81-46af-a635-36d019a0c26e','COMPLETED','74971849-7dac-4489-afb8-cbcd1ffd73e4',0);
+/*!40000 ALTER TABLE `certification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `hobby`
 --
 
@@ -337,4 +370,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-17  3:15:18
+-- Dump completed on 2024-04-29 22:04:19
