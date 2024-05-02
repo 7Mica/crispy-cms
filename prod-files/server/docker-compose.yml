@@ -1,8 +1,17 @@
+# Stack file for the servers that we're currently using
+
 services:
   cms_nestjs:
     container_name: cms_nestjs
     restart: unless-stopped
-    image: crispy-cms:firsttry
+    image: u7mica/crispy-cms:firsttry
+    networks:
+      - backend_network
+
+  tepic_transita_server:
+    container_name: tepic_transita_server
+    restart: unless-stopped
+    image: tepic-transita:firsttry
     networks:
       - backend_network
 
@@ -18,6 +27,7 @@ services:
       - 80:80
     depends_on:
       - cms_nestjs
+      - tepic_transita_server
 
 networks:
   backend_network:
