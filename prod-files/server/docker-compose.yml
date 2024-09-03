@@ -9,7 +9,12 @@ services:
   tepic_transita_server:
     container_name: tepic_transita_server
     restart: unless-stopped
-    image: tepic-transita:firsttry
+    image: tepic-transita:latest
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
     volumes:
       - /data/public:/app/public
     networks:
